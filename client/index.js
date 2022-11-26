@@ -1,12 +1,10 @@
 import React from "react";
-import ReactDOM, { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from './views/App.js';
 
-import { Provider } from 'react-redux';
-import store from './store.js'
+const container = document.getElementById('root');
+const root = createRoot(container);
 
-render(
-  <Provider store={store}>
+root.render(
     <App />
-  </Provider>,document.getElementById('root')
 );
