@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Authentication = () => {
+const Authentication = (props) => {
     const [ inputValues, setInputValues ] = useState({
         firstName: '',
         lastName: '', 
@@ -34,8 +34,7 @@ const Authentication = () => {
             phoneNum: '',
             isAdmin: 0,
         });
-
-        // will need to update state to switch App component's conditional rendering here
+        props.logIn();
     });
 
     }
@@ -49,7 +48,7 @@ const Authentication = () => {
             body: JSON.stringify( {email: inputValues.email, password: inputValues.password})
         })
         .then(() => {
-            // will need to update state to switch App component's conditional rendering here
+            props.logIn();
             return;
         })
     }
