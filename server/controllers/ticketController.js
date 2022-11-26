@@ -2,11 +2,15 @@ const db = require('../models/database.js');
 
 const ticketController = {}
 
-ticketController.getUserTickets = (req, res, next) => {
+ticketController.getUserTickets = async (req, res, next) => {
   console.log('entering getuserTickets middleware');
   try {
     // TO-DO db query here!
-    res.locals.userTickets = 'getUserTickets test'; // TO-DO: replace 'test' string with db response
+    const queryText = `SELECT * FROM tickets WHERE user_id=$1;`;
+    const values = [req.body.id]
+    const userTickets = await db.query(queryText, values);
+    console.log(userTickets);
+    res.locals.userTickets = userTickets.rows; // TO-DO: replace 'test' string with db response
     return next();
   } catch(err) {
     const error = {
@@ -18,11 +22,12 @@ ticketController.getUserTickets = (req, res, next) => {
   }
 }
 
-ticketController.getAdminTickets = (req, res, next) => {
+ticketController.getAdminTickets = async (req, res, next) => {
   console.log('entering getuserTickets middleware');
   try {
-    // TO-DO db query here!
-    res.locals.adminTickets = 'getAdminTickets test'; // TO-DO: replace 'test' string with db response
+    const queryText = `SELECT * FROM tickets;`;
+    const allTickets = await db.query(queryText);
+    res.locals.adminTickets = allTickets.rows; // TO-DO: replace 'test' string with db response
     return next();
   } catch(err) {
     const error = {
