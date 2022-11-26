@@ -4,8 +4,8 @@ import Ticket from "./Ticket";
 const Dashboard = () => {
 
     return (
-        <div>
-            <h1>This is dashboard</h1>
+        <div className = "dashboard">
+            <h1>Dashboard</h1>
             <Ticket />
         </div>
     )

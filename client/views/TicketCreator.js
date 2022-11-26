@@ -53,7 +53,7 @@ const TicketCreator = () => {
         </form>
 
     return (
-        <div>
+        <div className="ticketCreator">
             <h4>This is ticket creator</h4>
             {ticketForm}
         </div>
