@@ -7,8 +7,7 @@ import Dashboard from "./Dashboard";
 const MainPage = (props) => {
 
     return (
-        <div>
-            <h1>This is main page</h1>
+        <div className="mainPage">
             <Header firstName = {props.firstName}/>
             <Dashboard />
             <TicketCreator />

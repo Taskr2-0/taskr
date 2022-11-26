@@ -5,8 +5,7 @@ import Authentication from "./Authentication";
 const LandingPage = (props) => {
 
     return (
-        <div>
-            <h1>This is landing page</h1>
+        <div className="landingPage">
             <Summary />
             <Authentication logIn = {props.logIn} updateUser = {props.updateUser}/>
         </div>

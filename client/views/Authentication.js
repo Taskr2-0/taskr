@@ -88,20 +88,20 @@ const Authentication = (props) => {
             <option value={1}> Admin </option>
             <option value={0}> User </option>
         </select>
-        <input type="submit" value="submit" onClick={(e) => handleSubmit(e)}/>
+        <input type="submit" value="Submit" onClick={(e) => handleSubmit(e)}/>
     </form>
 
     // If the user presses login, render this form
     const loginForm = <form>
         <label> Email: <input type="email"  onChange={(e) => handleChange(e, 'email')}/></label>
         <label> Password: <input type="password"  onChange={(e) => handleChange(e, 'password')}/></label>
-        <input type="submit" value="sign in" onClick={(e) => handleSignin(e)}/>
+        <input type="submit" value="Sign In" onClick={(e) => handleSignin(e)}/>
     </form>
 
     const renderView = (formView === 'login') ? loginForm : signUpForm;
 
     return (
-        <div>
+        <div className="authentication">
             <button id = 'signup' onClick={toggleForm}> Sign Up </button>
             <button id = 'login' onClick={toggleForm}> Login </button>
             {renderView}
