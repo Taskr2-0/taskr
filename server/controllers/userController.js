@@ -26,12 +26,18 @@ userController.signup = async (req, res, next) => {
 }
 
 // log user in
-userController.login = (req, res, next) => {
+userController.login = async (req, res, next) => {
   console.log('entering login middleware');
   try {
-    // TO-DO db query here!
-    res.locals.loggedIn = 'login test'; // TO-DO: replace 'test' string with response from database
-    console.log('logged in: ', res.locals.loggedIn)
+    const queryText = 'SELECT * FROM users WHERE email=$1 AND password=$2;';
+    const values = [req.body.email, req.body.password];
+    const queryResult = await db.query(queryText, values);
+    console.log(queryResult.rows[0]);
+    
+    res.locals.loggedIn = queryResult.rows[0];
+    if (res.locals.loggedIn === undefined) {
+      res.locals.loggedIn = {err: 'User could not be verified'};
+    }
     return next();
   } catch(err) {
     const error = {
