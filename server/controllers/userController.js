@@ -1,4 +1,3 @@
-// require necessary SQL modules here
 const db = require('../models/database.js');
 
 const userController = {};
