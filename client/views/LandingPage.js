@@ -2,13 +2,14 @@ import React from "react";
 import Summary from "./Summary";
 import Authentication from "./Authentication";
 
-const LandingPage = () => {
+const LandingPage = (props) => {
 
+    
     return (
         <div>
             <h1>This is landing page</h1>
             <Summary />
-            <Authentication/>
+            <Authentication logIn = {props.logIn}/>
         </div>
     )
 
