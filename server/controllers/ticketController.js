@@ -74,11 +74,22 @@ ticketController.deleteTicket = (req, res, next) => {
   }
 }
 
-ticketController.updateTicket = (req, res, next) => {
+ticketController.updateTicket = async (req, res, next) => {
   console.log('entering updateTicket middleware');
   try {
     // TO-DO db query here!
-    res.locals.updatedTicket = 'updatedTicket test'; // TO-DO: replace test string with db response
+    const queryText = `
+    UPDATE tickets
+    SET status=$1
+    WHERE id=$2;
+    `;
+    const values = [req.body.newStatus, req.body.ticketId];
+    const updateResponse = await db.query(queryText, values);
+    const queryTextUpdated = `
+    SELECT * FROM tickets WHERE id=$1;
+    `
+    const updatedTicket = await db.query(queryTextUpdated, [req.body.ticketId]);
+    res.locals.updatedTicket = updatedTicket.rows[0]; // TO-DO: replace test string with db response
     return next();
   } catch(err) {
     const error = {
