@@ -4,12 +4,12 @@ import Header from "./Header";
 import Dashboard from "./Dashboard";
 
 
-const MainPage = () => {
+const MainPage = (props) => {
 
     return (
         <div>
             <h1>This is main page</h1>
-            <Header />
+            <Header firstName = {props.firstName}/>
             <Dashboard />
             <TicketCreator />
         </div>
