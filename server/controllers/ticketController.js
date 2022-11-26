@@ -1,5 +1,4 @@
-// require necessary SQL modules here
-
+const db = require('../models/database.js');
 
 const ticketController = {}
 
@@ -35,11 +34,14 @@ ticketController.getAdminTickets = (req, res, next) => {
   }
 }
 
-ticketController.createTicket = (req, res, next) => {
+ticketController.createTicket = async (req, res, next) => {
   console.log('entering createTicket middleware');
   try {
     // TO-DO db query here!
-    res.locals.newTicket = 'newTicket test'; // TO-DO: replace 'test' string with db response
+    const queryText = `INSERT INTO tickets (title, description, status, priority, user_id)
+    VALUES ($1, $2, $3, $4, $5);`;
+    const values = [req.body.title, req.body.description, req.body.status, req.body.priority, req.body.user_id];
+    const newTicket = await db.query(queryText, values);
     return next();
   } catch(err) {
     const error = {
