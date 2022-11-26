@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 
 
-const TicketCreator = () => {
+const TicketCreator = (props) => {
     const [ inputValues, setInputValues ] = useState({
+        user_id: Number(props.userId),
         title: '',
         description: '',
+        status: 'pending',
         priority: 0
     })
+    console.log(inputValues)
 
     function handleChange(e, updatedVal) {
         const updatedInputVal = { [updatedVal] : e.target.value }
@@ -27,8 +30,10 @@ const TicketCreator = () => {
         })
         .then(() => {
             setInputValues({
+                user_id: '',
                 title: '',
                 description: '',
+                status: '',
                 priority: '',
             });
         });

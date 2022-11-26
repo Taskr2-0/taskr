@@ -30,7 +30,7 @@ router.get('/usertickets', ticketController.getUserTickets, (req, res) => {
 
 // route requests for user to create a new ticket
 router.post('/usertickets', ticketController.createTicket, (req, res) => {
-  console.log ('exited createTicket middleware, preparing response');
+  console.log ('exited createTicket middleware, preparing response', res.body);
   return res.status(200).json('Created new ticket'); // expecting ticketController.createTicket to save db resposne to res locals property newTicket
 })
 
