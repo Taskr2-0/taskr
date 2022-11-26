@@ -12,7 +12,7 @@ const router = express.Router();
 // route requests to create new user
 router.post('/signup', userController.signup, (req, res) => {
   console.log('exited signup middleware, preparing signup response');
-  return res.status(200).json('Created new user'); // expecting userController.signup to save db response as locals property newUser
+  return res.status(200).json(res.locals.newUser); // expecting userController.signup to save db response as locals property newUser
 })
 
 // route requests to login
