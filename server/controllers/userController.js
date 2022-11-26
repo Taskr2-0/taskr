@@ -1,14 +1,18 @@
 // require necessary SQL modules here
-
+const db = require('../models/database.js');
 
 const userController = {};
 
 // save new users to database
-userController.signup = (req, res, next) => {
+userController.signup = async (req, res, next) => {
   console.log('entering signup middleware');
   try {
-    // TO-DO db query here!
-    res.locals.newUser = 'signup test'; // TO-DO: replace 'test' string with response from database
+    const queryText = `INSERT INTO users (email, first_name, last_name, password, phone_number, is_admin)
+                        VALUES ($1, $2, $3, $4, $5, $6)`;
+    const values = [req.body.email, req.body.firstName, req.body.lastName, req.body.password, req.body.phoneNum, req.body.isAdmin];
+    const newUser = await db.query(queryText, values);
+    console.log('newUser: ', newUser);
+    res.locals.newUser = newUser.rows[0]; // TO-DO: replace 'test' string with response from database
     console.log('created user: ', res.locals.newUser)
     return next();
   } catch(err) {
