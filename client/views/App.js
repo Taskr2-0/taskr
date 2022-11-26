@@ -6,18 +6,29 @@ import MainPage from "./MainPage";
 const App = (props) => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(() => false);
+    const [userDetails, setUserDetails] = useState({
+        id: null,
+        email: null,
+        first_name: null,
+        last_name: null,
+        is_admin: null
+    });
 
     function logIn() {
         setIsLoggedIn(() => true);
-    }
-
+    };
+    
+    function updateUser(userObject) {
+        setUserDetails(userObject);
+    };
+    
     return (
         <div>
             <h1>This is App component</h1>
 
             {isLoggedIn 
-            ? <MainPage />
-            : <LandingPage logIn = {logIn}/>
+            ? <MainPage userId = {userDetails.id} firstName = {userDetails.first_name}/>
+            : <LandingPage logIn = {logIn} updateUser = {updateUser}/>
             }
 
         </div>

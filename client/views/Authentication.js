@@ -47,11 +47,21 @@ const Authentication = (props) => {
             headers: { 'Content-Type' : 'Application/JSON' },
             body: JSON.stringify( {email: inputValues.email, password: inputValues.password})
         })
-        .then(() => {
-            props.logIn();
-            return;
-        })
-    }
+        .then((res) => res.json())
+        .then((data) => {
+            if (!data.err) {
+                const {id, first_name, last_name, email, is_admin} = data;
+                props.updateUser({
+                    id: id,
+                    email: email,
+                    first_name: first_name,
+                    last_name: last_name,
+                    is_admin: is_admin,
+                });
+                props.logIn();
+            };
+        });
+    };
 
     // Changes the state based on user input
     function handleChange(e, updatedVal) {
