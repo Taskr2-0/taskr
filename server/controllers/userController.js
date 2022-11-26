@@ -9,7 +9,11 @@ userController.signup = async (req, res, next) => {
     const queryText = `INSERT INTO users (email, first_name, last_name, password, phone_number, is_admin)
                         VALUES ($1, $2, $3, $4, $5, $6)`;
     const values = [req.body.email, req.body.firstName, req.body.lastName, req.body.password, req.body.phoneNum, req.body.isAdmin];
-    const newUser = await db.query(queryText, values);
+    const createResponse = await db.query(queryText, values);
+    const queryTextCreate = `
+    SELECT * FROM users WHERE email=$1;
+    `
+    const newUser = await db.query(queryTextCreate, [req.body.email]);
     console.log('newUser: ', newUser);
     res.locals.newUser = newUser.rows[0]; // TO-DO: replace 'test' string with response from database
     console.log('created user: ', res.locals.newUser)

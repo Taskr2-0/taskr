@@ -58,11 +58,20 @@ ticketController.createTicket = async (req, res, next) => {
   }
 }
 
-ticketController.deleteTicket = (req, res, next) => {
+ticketController.deleteTicket = async (req, res, next) => {
   console.log('entering deleteTicket middleware');
   try {
     // TO-DO db query here!
-    res.locals.deletedTicket = 'deletedTicket test'; // TO-DO: replace 'test' string with db response
+    const queryTextDelete = `
+    SELECT * FROM tickets WHERE id=$1;
+    `
+    const queryText = `
+    DELETE FROM tickets WHERE id=$1;
+    `
+    const values = [req.body.ticketId];
+    const deletedTicket = await db.query(queryTextDelete, values);
+    const deleteResponse = await db.query(queryText, values);
+    res.locals.deletedTicket = deletedTicket.rows; // TO-DO: replace 'test' string with db response
     return next();
   } catch(err) {
     const error = {
