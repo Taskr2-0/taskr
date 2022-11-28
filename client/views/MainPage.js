@@ -10,7 +10,7 @@ const MainPage = (props) => {
         <div className="mainPage">
             <Header firstName = {props.firstName}/>
             <Dashboard />
-            <TicketCreator />
+            <TicketCreator userId = {props.userId}/>
         </div>
     )
 
