@@ -75,28 +75,31 @@ const Authentication = (props) => {
 
  
     // If user presses Sign Up button, render this form
-    const signUpForm = <form>
-        <label> First Name: <input type="text" onChange={(e) => handleChange(e, 'firstName')}/></label>
-        <label> Last Name: <input type="text" onChange={(e) => handleChange(e, 'lastName')}/></label>
-        <label> Password: <input type="password"  onChange={(e) => handleChange(e, 'password')}/></label>
-        <label> Email: <input type="email"  onChange={(e) => handleChange(e, 'email')}/></label>
-        <label> Phone Number: <input type="tel" onChange={(e) => handleChange(e, 'phoneNum')}/></label>
-      {/* Drowndown Menu for isAdmin */}
-        <label> Type of User: </label>
-        <select onChange={(e) => handleChange(e, 'isAdmin')}>
-            <option value=""> --Please select an option-- </option>
-            <option value={1}> Admin </option>
-            <option value={0}> User </option>
-        </select>
-        <input type="submit" value="Submit" onClick={(e) => handleSubmit(e)}/>
-    </form>
+    const signUpForm = <div className="authentication-form">
+        <form >
+            <input type="text" placeholder="First Name" onChange={(e) => handleChange(e, 'firstName')}/>
+            <input type="text" placeholder="Last Name" onChange={(e) => handleChange(e, 'lastName')}/>
+            <input type="password"  placeholder="Password" onChange={(e) => handleChange(e, 'password')}/>
+            <input type="email"  placeholder="E-mail" onChange={(e) => handleChange(e, 'email')}/>
+            <input type="tel" placeholder="Phone Number" onChange={(e) => handleChange(e, 'phoneNum')}/>
+        {/* Drowndown Menu for isAdmin */}
+            <select onChange={(e) => handleChange(e, 'isAdmin')}>
+                <option value=""> --Please select an option-- </option>
+                <option value={1}> Admin </option>
+                <option value={0}> User </option>
+            </select>
+            <input type="submit" value="Create Account" onClick={(e) => handleSubmit(e)}/>
+        </form>
+    </div>
 
     // If the user presses login, render this form
-    const loginForm = <form>
-        <label> Email: <input type="email"  onChange={(e) => handleChange(e, 'email')}/></label>
-        <label> Password: <input type="password"  onChange={(e) => handleChange(e, 'password')}/></label>
-        <input type="submit" value="Sign In" onClick={(e) => handleSignin(e)}/>
-    </form>
+    const loginForm = <div className="authentication-form" >
+        <form>
+            <input type="email" placeholder="E-mail" onChange={(e) => handleChange(e, 'email')}/>
+            <input type="password" placeholder="Password"  onChange={(e) => handleChange(e, 'password')}/>
+            <input type="submit" value="Log In" onClick={(e) => handleSignin(e)}/>
+        </form>
+    </div>
 
     const renderView = (formView === 'login') ? loginForm : signUpForm;
 

@@ -1,0 +1,134 @@
+// MADELINE: 
+// HAS A POTENTIAL MERGE CONFLICT WITH AUTH COMPONENT
+// Deleted labels and added placeholders on input fields
+
+
+// Shades of Grey
+$primary-color: grey;
+$light-primary: lighten($primary-color, 30%);
+$medium-primary: lighten($primary-color, 10%);
+$dark-primary: darken($primary-color, 10%);
+
+// Shades of Black
+$secondary-color: black;
+
+// White
+$tertiary-color: white;
+
+// Shades of Blue??? Can change this
+$theme-color: blue;
+$light-theme: lighten($theme-color, 30%);
+$medium-theme: lighten($theme-color, 10%);
+$dark-theme: darken($theme-color, 10%);
+
+body {
+    color: $primary-color;
+    background-color:$secondary-color;
+}
+
+
+// LANDING PAGE: SHOWN BEFORE THE USER LOGS IN
+.landingPage { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+
+    align-items: center;
+    position: fixed;
+    top: 5vh;
+}
+
+.summary {
+    margin: 5vw;
+    padding: 2em;
+
+    h3 {
+        color: $tertiary-color;
+    }
+
+}
+
+.authentication {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 3fr;
+
+    // Might delete this margin property
+    margin: 5vw; 
+}
+
+#login {
+    grid-row-start: 1;
+    grid-column-start: 2; 
+    border-radius: 10px;
+
+    &:hover {
+        border-color: $theme-color;
+    }
+}
+
+#signup {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    border-radius: 10px;
+
+    &:hover {
+        border-color: $theme-color;
+    }
+
+}
+
+.authentication-form {
+    // Having trouble trying to get the auth form to span 2 columns
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display:flex;
+    flex-direction: column;
+
+    input {
+        box-sizing: border-box;
+        height: 2rem;
+        margin: .25rem;
+        width: 98%;
+        border: 1px solid #E6E6E6;
+        border-radius: 5px;
+    }
+
+}
+
+// MAIN PAGE SHOWN AFTER THE USER LOGS IN
+.mainPage {
+    
+}
+
+.mainHeader{ 
+    color: $tertiary-color;
+}
+
+.dashboard {
+
+}
+
+
+// EACH TICKET
+.ticketCard {
+    border: 1px solid $tertiary-color;
+    border-radius: 20px;
+    padding: 1rem;
+
+    // Make the title of the ticketCard white
+    // Make the description of the ticketCard grey
+
+    // Style a delete button
+    // Style an update button
+}
+
+.ticketCreator {
+    // Need to add a className to ticketCreator 
+    // but Jo is trying to merge so I don't want to edit that file
+
+}
+
+
+
+
+
