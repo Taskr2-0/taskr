@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const TicketCreator = (props) => {
     const [ inputValues, setInputValues ] = useState({
-        user_id: Number(props.userId),
+        user_id: Number(props.userDetails.id),
         title: '',
         description: '',
         status: 'pending',

@@ -8,9 +8,9 @@ const MainPage = (props) => {
 
     return (
         <div className="mainPage">
-            <Header firstName = {props.firstName}/>
-            <Dashboard />
-            <TicketCreator userId = {props.userId}/>
+            <Header userDetails = {props.userDetails}/>
+            <Dashboard userDetails = {props.userDetails}/>
+            <TicketCreator userDetails = {props.userDetails}/>
         </div>
     )
 
