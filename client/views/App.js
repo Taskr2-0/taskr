@@ -25,7 +25,7 @@ const App = (props) => {
     return (
         <div className="app">
             {isLoggedIn 
-            ? <MainPage userId = {userDetails.id} firstName = {userDetails.first_name}/>
+            ? <MainPage userDetails = {userDetails}/>
             : <LandingPage logIn = {logIn} updateUser = {updateUser}/>
             }
 

@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Ticket from "./Ticket";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
     const [ taskArr, setTaskArray ] = useState(() => []);
-    useEffect(() => {
-        fetch('/api/admintickets')
-            .then(res => res.json())
-            .then(data => {
-                setTaskArray(() => data)
-            })
-    },[])
+
+    // if is_admin is true, make fetch request to admintickets end point
+    // if (props.userDetails.is_admin === true) {
+        useEffect(() => {
+            fetch('/api/admintickets')
+                .then(res => res.json())
+                .then(data => {
+                    setTaskArray(() => data)
+                })
+        },[])
+
+    // }
     console.log('this is task outside', taskArr)
+
+    // if is_admin is false, make fetch request to usertickets end point with id in header
     
     const tickets = [];
     for (let i = 0; i < taskArr.length; i++) {
