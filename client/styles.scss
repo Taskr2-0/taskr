@@ -138,7 +138,25 @@ body {
 
 }
 
+.status-bar-wrapper {
+    display: flex;
+}
 
+.status-bar {
+    margin: 1em 4.5em;
+    height: 2em;
+    width: 15em;
+    background-color: $primary-color;
+    color: $secondary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+.status-checked {
+    background-color: $theme-color;
+}
 
 
 
