@@ -27,10 +27,26 @@ const Ticket = (props) => {
             props.renderPageAfterUpdate();
         });
     }
+
+    let pendingClass, inProgressClass, completedClass;
+
+    if (props.taskStatus === 'pending') {
+        pendingClass = "status-checked";
+        inProgressClass = "";
+        completedClass = "";
+    } else if (props.taskStatus === 'inprogress') {
+        pendingClass = "status-checked";
+        inProgressClass = "status-checked";
+        completedClass = "";
+    } else if (props.taskStatus === 'completed') {
+        pendingClass = "status-checked";
+        inProgressClass = "status-checked";
+        completedClass = "status-checked";
+    }
+
     return (
         <div className="ticketCard">
             <h3 className="taskTitle">{props.taskTitle}</h3>
-            <p className="taskCreator">Task Creator: {props.userDetails.first_name} {props.userDetails.last_name}</p>
             <div className="taskDesc">Task Description: {props.taskDesc}</div>
             <div className="taskStatus">Status: {props.taskStatus}</div>
             <div className="taskPriority">Priority: {props.taskPriority}</div>
@@ -43,9 +59,11 @@ const Ticket = (props) => {
                     </div>
                 ) : (
                     <div>
-                        <div> - </div>
-                        <div> - </div>
-                        <div> - </div>
+                        <div className="status-bar-wrapper">
+                            <div className={`status-bar ${pendingClass}`}> Pending Receipt </div>
+                            <div className={`status-bar ${inProgressClass}`}> In Progress </div>
+                            <div className={`status-bar ${completedClass}`}> Completed </div>
+                        </div>
                         <button className="delete-btn" onClick={deleteTicket}> DELETE </button>
                     </div>
 
