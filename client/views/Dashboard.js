@@ -23,7 +23,12 @@ const Dashboard = (props) => {
     },[])
 
     function renderPageAfterUpdate() {
-        fetch('/api/admintickets')
+        fetch(route, {
+            method: 'GET',
+            headers: {
+                'id': props.userDetails.id
+            }
+        })
                 .then(res => res.json())
                 .then(data => {
                     setTaskArray(() => data)
