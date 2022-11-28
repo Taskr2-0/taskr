@@ -1,5 +1,12 @@
 const db = require('../models/database.js');
 
+// requiring Twilio API
+const twilioAuth = require('../../twilioAuth.js');
+const accountSid = twilioAuth.TWILIO_ACCOUNT_SID;
+const authToken = twilioAuth.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+
+
 const ticketController = {}
 
 ticketController.getUserTickets = async (req, res, next) => {
@@ -98,7 +105,24 @@ ticketController.updateTicket = async (req, res, next) => {
     SELECT * FROM tickets WHERE id=$1;
     `
     const updatedTicket = await db.query(queryTextUpdated, [req.body.ticketId]);
-    res.locals.updatedTicket = updatedTicket.rows[0]; // TO-DO: replace test string with db response
+    // console.log('body of selected ticket: ', updatedTicket.rows[0]);
+    res.locals.updatedTicket = updatedTicket.rows[0];
+    res.locals.ticketTitle = res.locals.updatedTicket.title;
+    res.locals.ticketStatus = req.body.newStatus;
+
+    // get user phone number: 
+    const numberQueryText = `SELECT phone_number FROM users WHERE id=$1`
+    const userNumber = await db.query(numberQueryText, [res.locals.updatedTicket.user_id]);
+    console.log('number: ', userNumber);
+    // send Twilio alert
+    client.messages
+      .create({
+        body: `From Taskr: Your task '${res.locals.ticketTitle}' has been updated to ${res.locals.ticketStatus}`,
+        from: '+15618164263',
+        to: `+1${userNumber.rows[0].phone_number}`
+      })
+      .then(message => console.log(message.sid));
+
     return next();
   } catch(err) {
     const error = {
