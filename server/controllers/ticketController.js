@@ -114,14 +114,15 @@ ticketController.updateTicket = async (req, res, next) => {
     const numberQueryText = `SELECT phone_number FROM users WHERE id=$1`
     const userNumber = await db.query(numberQueryText, [res.locals.updatedTicket.user_id]);
     console.log('number: ', userNumber);
-    // send Twilio alert
-    client.messages
-      .create({
-        body: `From Taskr: Your task '${res.locals.ticketTitle}' has been updated to ${res.locals.ticketStatus}`,
-        from: '+15618164263',
-        to: `+1${userNumber.rows[0].phone_number}`
-      })
-      .then(message => console.log(message.sid));
+    if (userNumber.rows[0].phone_number.length === 10) {
+      client.messages
+        .create({
+          body: `From Taskr: Your task '${res.locals.ticketTitle}' has been updated to ${res.locals.ticketStatus}`,
+          from: '+15618164263',
+          to: `+1${userNumber.rows[0].phone_number}`
+        })
+        .then(message => console.log(message.sid));
+    }    // send Twilio alert
 
     return next();
   } catch(err) {
