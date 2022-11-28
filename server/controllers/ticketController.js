@@ -7,7 +7,7 @@ ticketController.getUserTickets = async (req, res, next) => {
   try {
     // TO-DO db query here!
     const queryText = `SELECT * FROM tickets WHERE user_id=$1;`;
-    const values = [req.body.id]
+    const values = [req.headers.id]
     const userTickets = await db.query(queryText, values);
     console.log(userTickets);
     res.locals.userTickets = userTickets.rows; // TO-DO: replace 'test' string with db response
