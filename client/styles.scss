@@ -63,6 +63,7 @@ body {
 
     &:hover {
         border-color: $theme-color;
+        background-color: $light-theme;
     }
 }
 
@@ -73,6 +74,7 @@ body {
 
     &:hover {
         border-color: $theme-color;
+        background-color: $light-theme;
     }
 
 }
@@ -91,6 +93,10 @@ body {
         width: 98%;
         border: 1px solid #E6E6E6;
         border-radius: 5px;
+
+        &:hover {
+            border-color: $theme-color;
+        }
     }
 
 }
@@ -109,13 +115,16 @@ body {
 }
 
 
-// EACH TICKET
+// STYLING EACH INDIVIDUAL TICKET
 .ticketCard {
     border: 1px solid $tertiary-color;
     border-radius: 20px;
     padding: 1rem;
 
-    // Make the title of the ticketCard white
+    h3 {
+        color: $tertiary-color;
+    }
+
     // Make the description of the ticketCard grey
 
     // Style a delete button

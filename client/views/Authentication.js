@@ -25,6 +25,22 @@ const Authentication = (props) => {
             headers: { 'Content-Type' : 'Application/JSON' },
             body: JSON.stringify(inputValues),
         })
+        // If SignUp details are rejected, the app does not redirect to the MainPage
+        .then(res => res.json())
+        .then(data => {
+            if (data.status !== 400) {
+                const { id, first_name, last_name, email, is_admin } = data;
+                props.updateUser({
+                    id: id,
+                    email: email,
+                    first_name: first_name,
+                    last_name: last_name,
+                    is_admin: is_admin,
+                });
+                props.logIn();
+            }
+            else console.log('INSUFFICIENT SIGNUP')
+        })
         .then(() => {
             setInputValues({
             firstName: '',
@@ -33,10 +49,8 @@ const Authentication = (props) => {
             email: '', 
             phoneNum: '',
             isAdmin: 0,
+            });
         });
-        props.logIn();
-    });
-
     }
 
     // Send a POST request to the 'api/login' endpoint
@@ -49,7 +63,8 @@ const Authentication = (props) => {
         })
         .then((res) => res.json())
         .then((data) => {
-            if (!data.err) {
+            console.log('LOGIN DATA', data);
+            if (!data.err && data.email !== '' && data.password !== '') {
                 const {id, first_name, last_name, email, is_admin} = data;
                 props.updateUser({
                     id: id,
