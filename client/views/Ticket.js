@@ -23,7 +23,7 @@ const Ticket = (props) => {
             <div className="taskStatus">Status: {props.taskStatus}</div>
             <div className="taskPriority">Priority: {props.taskPriority}</div>
             {
-                props.isAdmin && (
+                props.isAdmin === 1 && (
                     <div>
                         <button onClick={updateStatus} className="ticket-status pending-btn" value="pending" >Pending</button>
                         <button onClick={updateStatus} className="ticket-status inprogress-btn" value="inprogress" >In Progress</button>
