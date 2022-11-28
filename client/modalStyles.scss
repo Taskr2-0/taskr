@@ -1,0 +1,95 @@
+$bg-color: black;
+$header-color: white;
+
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(128,128,128,0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    padding: 3vh;
+    width: 40vw;
+    height: 45vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 20px;
+}
+
+// STYLING THE CLOSE BUTTON
+.close-button {
+    display:flex;
+    color: red;
+    align-self: flex-end;
+    width: 5vh;
+    background-color: #f2848444;
+    padding: 0.3em 1.2em;
+    border-radius: 1em;
+    text-shadow: 0 0.04em 0.04em rgaba(0,0,0,0.35);
+    text-align: center;
+    transition: all 0.2s; 
+    border: 0.01em solid #f28484;
+    justify-content: center;
+    cursor: pointer;
+
+
+    &:hover {
+        border: 0.01em solid rgba(255,255,255,0);
+        border-color: red;
+    }
+}
+
+.modal-header {
+    // color: $header-color;
+    display: flex;
+    justify-content: center;
+}
+
+.enter-title {
+    height: 8%;
+    border-radius: 10px;
+    border-color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: .75rem;
+    border: .5px solid grey;
+
+
+}
+
+.enter-description {
+    height: 40%;
+    resize: none;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: .75rem;
+    border: .5px solid grey;
+}
+
+.priority {
+    height: 8%;
+    border-radius: 10px;
+
+}
+
+.submit-button {
+    height: 8%;
+    border-radius: 10px;
+
+
+    &:hover { 
+        background-color: grey;
+    }
+}
+
+
+
