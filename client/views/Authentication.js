@@ -117,12 +117,13 @@ const Authentication = (props) => {
     </div>
 
     const renderView = (formView === 'login') ? loginForm : signUpForm;
-
+    const signUpClass = (formView === 'signup') ? "auth-selected" : "";
+    const logInClass = (formView === 'login') ? "auth-selected" : "";
     return (
         <div className="authentication">
             <div className="authentication-btns">
-            <button id = 'signup' onClick={toggleForm}> Sign Up </button>
-            <button id = 'login' onClick={toggleForm}> Login </button>
+            <button id = 'signup' className={`auth-btn ${signUpClass}`} onClick={toggleForm}> Sign Up </button>
+            <button id = 'login' className={`auth-btn ${logInClass}`} onClick={toggleForm}> Login </button>
             </div>
             {renderView}
         </div>
