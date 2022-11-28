@@ -41,7 +41,7 @@ const TicketCreator = (props) => {
 
     const ticketForm = 
         <form>
-            <button>X</button>
+            <button onClick={() => props.setShowComponent(false)}>X</button>
             <h3>New Task Request</h3>
             <label>Title: <input type="text" onChange={(e) => handleChange(e, 'title')} /></label>
             <label>Description: <input type="text" onChange={(e) => handleChange(e, 'description')} /></label>
@@ -59,7 +59,6 @@ const TicketCreator = (props) => {
 
     return (
         <div className="ticketCreator">
-            <h4>This is ticket creator</h4>
             {ticketForm}
         </div>
     )

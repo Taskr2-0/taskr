@@ -22,7 +22,7 @@ const MainPage = (props) => {
                 <Header userDetails = {props.userDetails}/>
                 <Dashboard userDetails = {props.userDetails}/>
                 <button className="newRequest" onClick={() => setShowComponent(true)}>New Request</button>
-                {showComponent && <TicketCreator userDetails = {props.userDetails}/>}
+                {showComponent && <TicketCreator userDetails = {props.userDetails} setShowComponent = {setShowComponent}/>}
             </div>
         )
     }
