@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Ticket from "./Ticket";
+import TicketCreator from "./TicketCreator"
 
 const Dashboard = (props) => {
     const [ taskArr, setTaskArray ] = useState(() => []);
+
+    const [showComponent, setShowComponent] = useState(false);
 
     // if is_admin is true, make fetch request to admintickets end point
     // if is_admin is false, make fetch request to usertickets end point with id in header
@@ -57,6 +60,12 @@ const Dashboard = (props) => {
         <div className = "dashboard">
             <h1>Dashboard</h1>
             {tickets}
+            { props.userDetails.is_admin === 0 &&
+                <div>
+                    <button className="newRequest" onClick={() => setShowComponent(true)}>New Request</button>
+                    {showComponent && <TicketCreator userDetails = {props.userDetails} renderPageAfterUpdate={renderPageAfterUpdate} setShowComponent={setShowComponent}/>}
+                </div>
+            }
         </div>
     )
 
