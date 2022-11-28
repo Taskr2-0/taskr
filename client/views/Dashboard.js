@@ -22,17 +22,28 @@ const Dashboard = (props) => {
         })
     },[])
 
+    function renderPageAfterUpdate() {
+        fetch('/api/admintickets')
+                .then(res => res.json())
+                .then(data => {
+                    setTaskArray(() => data)
+        })
+    }
+
     console.log('this is task outside', taskArr)
         
-    
+    const newTaskArr = taskArr.sort((a, b) => b.priority - a.priority);
     const tickets = [];
-    for (let i = 0; i < taskArr.length; i++) {
+    for (let i = 0; i < newTaskArr.length; i++) {
         tickets.push(<Ticket taskId={taskArr[i].id} 
                              userId={taskArr[i].user_id}
                              taskTitle={taskArr[i].title}
                              taskDesc={taskArr[i].description}
                              taskStatus={taskArr[i].status}
-                             taskPriority={taskArr[i].priority}   
+                             taskPriority={taskArr[i].priority}  
+                             isAdmin={props.userDetails.is_admin}
+                             renderPageAfterUpdate={renderPageAfterUpdate}
+                             userDetails={props.userDetails} 
                     />)
     }
     console.log(tickets)
