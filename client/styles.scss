@@ -1,6 +1,5 @@
-// MADELINE: 
-// HAS A POTENTIAL MERGE CONFLICT WITH AUTH COMPONENT
-// Deleted labels and added placeholders on input fields
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 
 // Shades of Grey
@@ -24,6 +23,8 @@ $dark-theme: darken($theme-color, 10%);
 body {
     color: $primary-color;
     background-color:$secondary-color;
+    font-family: 'Roboto', sans-serif;
+
 }
 
 
