@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import modalStyles from "../modalStyles.css"
+import modalStyles from "../modalStyles.scss"
 
 
 const TicketCreator = (props) => {
@@ -44,8 +44,8 @@ const TicketCreator = (props) => {
     const ticketForm = 
         <form className="modal">
             <div className="modal-content">
-            <button className="close-button" onClick={() => props.setShowComponent(false)}>X</button>
-            <h3 className="modal-header">New Task Request</h3>
+                    <button className="close-button" onClick={() => props.setShowComponent(false)}>❌</button>
+                    <h3 className="modal-header">New Task Request</h3>
             <input className="enter-title" placeholder="Enter Title" type="text" onChange={(e) => handleChange(e, 'title')} />
             <textarea className="enter-description" placeholder="Enter Description" type="text" onChange={(e) => handleChange(e, 'description')} />
             <select className="priority" onChange={(e) => handleChange(e, 'priority')}>
