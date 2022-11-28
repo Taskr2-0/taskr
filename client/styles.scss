@@ -1,12 +1,11 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
 
 
 // Shades of Grey
-$primary-color: grey;
-$light-primary: lighten($primary-color, 30%);
-$medium-primary: lighten($primary-color, 10%);
-$dark-primary: darken($primary-color, 10%);
+$primary-color: #190933;
+$light-primary: #B084CC;
+$medium-primary: #4C2C69;
 
 // Shades of Black
 $secondary-color: black;
@@ -15,91 +14,140 @@ $secondary-color: black;
 $tertiary-color: white;
 
 // Shades of Blue??? Can change this
-$theme-color: blue;
+$theme-color: #5DD9C1;
 $light-theme: lighten($theme-color, 30%);
 $medium-theme: lighten($theme-color, 10%);
 $dark-theme: darken($theme-color, 10%);
 
+$bg-color: #ACFCD9;
+
+$main-color: #2F3E46;
+$dark-main: #354F52;
+$medium-main: #52796F;
+$light-main: #84A98C;
+$bg-main: #CAD2C5;
+
 body {
     color: $primary-color;
-    background-color:$secondary-color;
+    background-color: $bg-main;
     font-family: 'Roboto', sans-serif;
-
+    margin: 0;
 }
 
 
 // LANDING PAGE: SHOWN BEFORE THE USER LOGS IN
 .landingPage { 
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr);
-
-    align-items: center;
-    position: fixed;
-    top: 5vh;
+    width: 100%;
+    height: 60%;
+    margin-top: 12%;
+    display: flex; 
+    align-items: flex-start;
+    justify-content: space-around;
+    background-color: $dark-main;
+    box-shadow: 0px 0px 15px $main-color;
 }
 
 .summary {
-    margin: 5vw;
-    padding: 2em;
-
+    margin: 5%;
+    width: 37.5%;
+    color: #FFFFFF;
     h3 {
         color: $tertiary-color;
+        margin: 0;
+        font-family: 'Titan One', cursive;
+        font-size: 5em;
     }
-
+    p {
+        line-height: 1.25;
+    }
 }
 
 .authentication {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr 3fr;
-
-    // Might delete this margin property
-    margin: 5vw; 
-}
-
-#login {
-    grid-row-start: 1;
-    grid-column-start: 2; 
-    border-radius: 10px;
-
-    &:hover {
-        border-color: $theme-color;
-        background-color: $light-theme;
-    }
-}
-
-#signup {
-    grid-row-start: 1;
-    grid-column-start: 1;
-    border-radius: 10px;
-
-    &:hover {
-        border-color: $theme-color;
-        background-color: $light-theme;
-    }
-
-}
-
-.authentication-form {
-    // Having trouble trying to get the auth form to span 2 columns
-    grid-column-start: 1;
-    grid-column-end: 3;
-    display:flex;
+    margin: 5%;
+    width: 42.5%;
+    background-color: $light-main;
+    display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 15px;
+    padding: 2.5%;
+    
+    .authentication-btns {
+        display: flex;
+        border: 2.5px solid $dark-main;
+        border-radius: 15px;
+        background-color: $tertiary-color;
+        height: 2.5em;
 
-    input {
-        box-sizing: border-box;
-        height: 2rem;
-        margin: .25rem;
-        width: 98%;
-        border: 1px solid #E6E6E6;
-        border-radius: 5px;
+        #signup,
+        #login {
+        width: 50%;
+        height: 100%;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.25em;
+        background-color: $tertiary-color;
+        border: none;
+        color: $dark-main;
+        cursor: pointer;
+        border-radius: 15px;
+        box-shadow: 0px 0px 15px $main-color;
 
         &:hover {
-            border-color: $theme-color;
+            background-color: $dark-main;
+            color: $tertiary-color;
         }
+        }
+
+        
     }
 
+    .authentication-form {
+        margin-top: .8em;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        select {
+            width: 98%;
+            height: 2rem;
+            margin: .25rem;
+        }
+
+        input {
+            box-sizing: border-box;
+            height: 2rem;
+            margin: .25rem;
+            width: 98%;
+            border: 1px solid #E6E6E6;
+            border-radius: 5px;
+            padding: 10px;
+            &:hover {
+                border-color: $theme-color;
+            }
+        }
+
+        #signup-submit,
+        #login-submit {
+            margin-top: .8em;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.25em;
+            background-color: $tertiary-color;
+            border: none;
+            color: $dark-main;
+            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px $main-color;
+            padding: 0;
+            &:hover {
+                background-color: $dark-main;
+                color: $tertiary-color;
+            }
+        }
+    }
 }
 
 // MAIN PAGE SHOWN AFTER THE USER LOGS IN
@@ -109,27 +157,52 @@ body {
 
 .mainHeader{ 
     color: $tertiary-color;
+    background-color: $main-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    h1 {
+        margin: 0;
+        font-family: 'Titan One', cursive;;
+    }
 }
 
 .dashboard {
-
+    padding: 0 10%;
+    h1 {
+        font-size: 1.5em;
+        color: $main-color;
+    }
 }
 
 
 // STYLING EACH INDIVIDUAL TICKET
 .ticketCard {
-    border: 1px solid $tertiary-color;
+    box-shadow: 0px 0px 15px $dark-main;
+    background-color: $dark-main;
     border-radius: 20px;
-    padding: 1rem;
+    padding: 1em;
+    margin-bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
 
     h3 {
         color: $tertiary-color;
     }
-
     // Make the description of the ticketCard grey
-
     // Style a delete button
     // Style an update button
+    button {
+        border-radius: 20px;
+        height: 2.5em;
+        width: 6em;
+        border: none;
+        background-color: $light-main;
+        color: $tertiary-color;
+        font-weight: bold;
+        box-shadow: 0px 0px 5px $bg-main;
+    }
 }
 
 .ticketCreator {
@@ -140,6 +213,7 @@ body {
 
 .status-bar-wrapper {
     display: flex;
+    width: 100%;
 }
 
 .status-bar {
@@ -155,7 +229,7 @@ body {
 }
 
 .status-checked {
-    background-color: $theme-color;
+    background-color: $medium-main;
 }
 
 

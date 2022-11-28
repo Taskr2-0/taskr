@@ -103,7 +103,7 @@ const Authentication = (props) => {
                 <option value={1}> Admin </option>
                 <option value={0}> User </option>
             </select>
-            <input type="submit" value="Create Account" onClick={(e) => handleSubmit(e)}/>
+            <input id="signup-submit" type="submit" value="Create Account" onClick={(e) => handleSubmit(e)}/>
         </form>
     </div>
 
@@ -112,7 +112,7 @@ const Authentication = (props) => {
         <form>
             <input type="email" placeholder="E-mail" onChange={(e) => handleChange(e, 'email')}/>
             <input type="password" placeholder="Password"  onChange={(e) => handleChange(e, 'password')}/>
-            <input type="submit" value="Log In" onClick={(e) => handleSignin(e)}/>
+            <input id="login-submit" type="submit" value="Log In" onClick={(e) => handleSignin(e)}/>
         </form>
     </div>
 
@@ -120,8 +120,10 @@ const Authentication = (props) => {
 
     return (
         <div className="authentication">
+            <div className="authentication-btns">
             <button id = 'signup' onClick={toggleForm}> Sign Up </button>
             <button id = 'login' onClick={toggleForm}> Login </button>
+            </div>
             {renderView}
         </div>
     )
