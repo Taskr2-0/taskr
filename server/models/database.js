@@ -1,9 +1,11 @@
 const { Pool } = require('pg');
 
-const PG_URI = require('../../credentials.js');
+const { PG_URI, TEST_URI } = require('../../credentials.js');
+
+const connectionString = process.env.NODE_ENV === 'test' ? TEST_URI : PG_URI;
 
 const pool = new Pool({
-  connectionString: PG_URI,
+  connectionString
 });
 
 module.exports = {
