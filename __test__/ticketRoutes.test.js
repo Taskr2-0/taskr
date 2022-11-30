@@ -1,18 +1,9 @@
 const request = require("supertest");
-const { server } = require("../server/server.js");
 const mockDb = require("./mock_db");
 
 const endpoint = "http://localhost:3000";
 
 describe("TicketRoutes Tests", () => {
-  afterAll(async () => {
-    try {
-      await server.close();
-    } catch (error) {
-      console.log(error);
-    }
-  });
-
   it("should get all tickets for valid user", () =>
     request(endpoint)
       .get("/api/usertickets")

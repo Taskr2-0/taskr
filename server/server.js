@@ -43,5 +43,4 @@ const server = app.listen(PORT, () => {
   console.log(`The CRAB is listening on port: ${PORT}. Watch out!!!!`);
 })
 
-module.exports = app;
-module.exports.server = server;
+module.exports = server;
