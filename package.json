@@ -7,8 +7,7 @@
     "start": "nodemon server/server.js",
     "dev": "webpack serve --open --mode development & npm start",
     "build": "webpack --mode production",
-    "test": "NODE_ENV=test jest",
-    "super": "NODE_ENV=test nodemon server/server.js"
+    "test": "NODE_ENV=test jest --detectOpenHandles"  
   },
   "repository": {
     "type": "git",
