@@ -1,10 +1,10 @@
 const db = require('../models/database.js');
 
 // requiring Twilio API
-const twilioAuth = require('../../twilioAuth.js');
-const accountSid = twilioAuth.TWILIO_ACCOUNT_SID;
-const authToken = twilioAuth.TWILIO_AUTH_TOKEN;
-const client = require('twilio')(accountSid, authToken);
+// const twilioAuth = require('../../twilioAuth.js');
+// const accountSid = twilioAuth.TWILIO_ACCOUNT_SID;
+// const authToken = twilioAuth.TWILIO_AUTH_TOKEN;
+// const client = require('twilio')(accountSid, authToken);
 
 
 const ticketController = {}
@@ -51,9 +51,10 @@ ticketController.createTicket = async (req, res, next) => {
   try {
     // TO-DO db query here!
     const queryText = `INSERT INTO tickets (title, description, status, priority, user_id)
-    VALUES ($1, $2, $3, $4, $5);`;
+    VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
     const values = [req.body.title, req.body.description, req.body.status, req.body.priority, req.body.user_id];
     const newTicket = await db.query(queryText, values);
+    res.locals.newTicket = newTicket.rows[0];
     return next();
   } catch(err) {
     const error = {
