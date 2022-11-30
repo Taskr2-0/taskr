@@ -7,7 +7,7 @@ import '@testing-library/jest-dom'
 import Ticket from '../client/views/Ticket.js'
 import {enableFetchMocks} from 'jest-fetch-mock'
 enableFetchMocks()
-// import Dashboard from '../client/views/Dashboard.js'
+import Dashboard from '../client/views/Dashboard.js'
 // import MainPage from '../client/views/MainPage.js'
 // import App from '../client/views/App.js'
 import {toBeInTheDocument} from '@testing-library/jest-dom/dist/matchers'
@@ -70,13 +70,13 @@ if (props.isAdmin === 0){
 
 describe('Dashboard', () => {
   const props = {
-    isAdmin: true,
+    isAdmin: false,
     userDetails: {
       id: 1,
       email: 'test@test.com',
       first_name: 'Brynn',
       last_name: 'Sakell',
-      is_admin: 1,
+      is_admin: 0,
     }
   }
   let dash;
@@ -84,9 +84,10 @@ describe('Dashboard', () => {
     dash = render(<Dashboard {...props} />);
   })
 
-  if (isAdmin === false){
+  if (props.isAdmin === false){
   test('Users should have button that will render ticketCreator onClick', () => {
-      // const newReq = 
+      const newReq = expect(getAllByRole('button', {name: 'New Request'}));
+      fireEvent.click(newReq[0]);
       expect(screen.getByRole('form').toHaveClass('modal'))
     })
   }
