@@ -1,10 +1,10 @@
 const db = require('../models/database.js');
 
 // requiring Twilio API
-const twilioAuth = require('../../twilioAuth.js');
-const accountSid = twilioAuth.TWILIO_ACCOUNT_SID;
-const authToken = twilioAuth.TWILIO_AUTH_TOKEN;
-const client = require('twilio')(accountSid, authToken);
+// const twilioAuth = require('../../twilioAuth.js');
+// const accountSid = twilioAuth.TWILIO_ACCOUNT_SID;
+// const authToken = twilioAuth.TWILIO_AUTH_TOKEN;
+// const client = require('twilio')(accountSid, authToken);
 
 
 const ticketController = {}
