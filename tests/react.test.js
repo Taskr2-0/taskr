@@ -49,8 +49,8 @@ describe('Ticket', () => {
     const pending = ticket.getAllByRole('button', {name: 'Pending'});
     const inProgress = ticket.getAllByRole('button', {name: 'In Progress'});
     const completed = ticket.getAllByRole('button', {name: 'Completed'});
-    fireEvent.click(pending[0]);
-    expect(props.renderPageAfterUpdate).toHaveBeenCalled();
+    // fireEvent.click(pending[0]);
+    // expect(props.renderPageAfterUpdate).toHaveBeenCalled();
   })
 // }
 })
