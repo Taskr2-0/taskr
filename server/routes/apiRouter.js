@@ -5,9 +5,19 @@ const userController = require('../controllers/userController.js');
 const ticketController = require('../controllers/ticketController.js');
 
 const app = require('../server.js');
+const session = require('express-session');
 
 
 const router = express.Router();
+
+//router to check if user has been authenticated by session
+router.get('/', (req, res) => {
+  if(req.session.user){
+    return res.status(200).json(req.session.user);
+  }else{
+    return res.sendStatus(400);
+  }
+})
 
 // route requests to create new user
 router.post('/signup', userController.signup, (req, res) => {
@@ -22,20 +32,20 @@ router.post('/login', userController.login, (req, res) => {
 })
 
 // route requests to get user tickets
-router.get('/usertickets', ticketController.getUserTickets, (req, res) => {
+router.get('/usertickets', userController.authenticateUser,ticketController.getUserTickets, (req, res) => {
   console.log ('exited get user tickets middleware, preparing get tickets reesponse');
   return res.status(200).json(res.locals.userTickets); // expecting ticketController.getUserTickets to save db response as locals property userTickets
 })
 
 
 // route requests for user to create a new ticket
-router.post('/usertickets', ticketController.createTicket, (req, res) => {
+router.post('/usertickets', userController.authenticateUser, ticketController.createTicket, (req, res) => {
   console.log ('exited createTicket middleware, preparing response', res.body);
   return res.status(200).json(res.locals.newTicket); // expecting ticketController.createTicket to save db resposne to res locals property newTicket
 })
 
 // route requests for user to delete ticket
-router.delete('/usertickets', ticketController.deleteTicket, (req, res) => {
+router.delete('/usertickets', userController.authenticateUser, ticketController.deleteTicket, (req, res) => {
   console.log ('exited deleteTicket middleware, preparing response');
   return res.status(200).json(res.locals.deletedTicket); // expecting ticketController.deleteTicket to save db response to locals as deletedTicket
 })

@@ -42,7 +42,8 @@ userController.login = async (req, res, next) => {
     const values = [req.body.email, req.body.password];
     const queryResult = await db.query(queryText, values);
     console.log(queryResult.rows[0]);
-
+    req.session.user = queryResult.rows[0];
+    req.session.authorized = true;
     res.locals.loggedIn = queryResult.rows[0];
     if (res.locals.loggedIn === undefined) {
       res.locals.loggedIn = { err: "User could not be verified" };
@@ -57,5 +58,19 @@ userController.login = async (req, res, next) => {
     return next(error);
   }
 };
+
+userController.authenticateUser = (req, res, next) => {
+  if(req.session.user){
+    res.locals.user = req.session.user
+    return next();
+  }else {
+    const error = {
+      log: 'Error at userController.authenticateUser middleware: Unauthorized',
+      status: 400,
+      message: {err: 'Unauthorized'}
+    }
+    return next(error);
+  }
+}
 
 module.exports = userController;
