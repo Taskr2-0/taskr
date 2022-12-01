@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
 const Authentication = (props) => {
+
+    // Tracks input of user into the signup/login fields within state
+    // Note that these state values are determined by the user's entry, *not* by user info received from database
     const [ inputValues, setInputValues ] = useState({
         firstName: '',
         lastName: '', 
@@ -10,8 +13,10 @@ const Authentication = (props) => {
         isAdmin: 0,
     });
 
+    // State of formView determines whether component renders a sign up form or a log in form
     const [ formView, setFormView ] = useState('login');
 
+    // Toggles formView state (thereby rerendering login or signup form) whenever user clicks on corresponding tab
     function toggleForm(e) {
         if (e.target.id === 'login') setFormView('login');
         else if (e.target.id === 'signup') setFormView('signup');
@@ -53,7 +58,7 @@ const Authentication = (props) => {
         });
     }
 
-    // Send a POST request to the 'api/login' endpoint
+    // Sends a POST request to the 'api/login' endpoint
     function handleSignin(e) {
         e.preventDefault();
         fetch('api/login', {
