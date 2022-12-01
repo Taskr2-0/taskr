@@ -50,7 +50,7 @@ const Dashboard = (props) => {
                              taskStatus={taskArr[i].status}
                              taskPriority={taskArr[i].priority} 
                              firstName={taskArr[i].first_name}
-                             lastName={taskArr[i.last_name]} 
+                             lastName={taskArr[i].last_name} 
                              isAdmin={props.userDetails.is_admin}
                              renderPageAfterUpdate={renderPageAfterUpdate}
                              userDetails={props.userDetails} 
