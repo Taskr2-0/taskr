@@ -11,12 +11,20 @@ const ticketController = {}
 
 ticketController.getUserTickets = async (req, res, next) => {
   console.log('entering getuserTickets middleware');
+  if(!req.session.user){
+    const error = {
+      log: 'Error at ticketController.getUserTickets middleware: Unauthorized',
+      status: 400,
+      message: {err: 'Unauthorized'}
+    }
+    return next(error);
+  }
+
   try {
     // TO-DO db query here!
     const queryText = `SELECT * FROM tickets WHERE user_id=$1;`;
-    const values = [req.headers.id]
+    const values = [req.session.user.id]
     const userTickets = await db.query(queryText, values);
-    console.log(userTickets);
     res.locals.userTickets = userTickets.rows; // TO-DO: replace 'test' string with db response
     return next();
   } catch(err) {
