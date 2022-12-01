@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Header from "./Header";
 
 const Authentication = (props) => {
 
@@ -11,6 +12,7 @@ const Authentication = (props) => {
         email: '', 
         phoneNum: '',
         isAdmin: 0,
+        adminCode: ''
     });
 
     // State of formView determines whether component renders a sign up form or a log in form
@@ -54,6 +56,7 @@ const Authentication = (props) => {
             email: '', 
             phoneNum: '',
             isAdmin: 0,
+            adminCode: ''
             });
         });
     }
@@ -84,8 +87,10 @@ const Authentication = (props) => {
     };
 
     // Changes the state based on user input
+    let code;
     function handleChange(e, updatedVal) {
         const updatedInputVal = { [updatedVal] : e.target.value }
+
         const updatedState = {
             ...inputValues,
             ...updatedInputVal,
@@ -93,7 +98,7 @@ const Authentication = (props) => {
         setInputValues(updatedState);
     }
 
- 
+
     // If user presses Sign Up button, render this form
     const signUpForm = <div className="authentication-form">
         <form >
@@ -108,9 +113,11 @@ const Authentication = (props) => {
                 <option value={1}> Admin </option>
                 <option value={0}> User </option>
             </select>
+            <input type="code" placeholder="Enter Admin Code" className={inputValues.isAdmin == 1 ? '' : 'hideCode'} onChange={(e) => handleChange(e, 'adminCode')}/>
             <input id="signup-submit" type="submit" value="Create Account" onClick={(e) => handleSubmit(e)}/>
         </form>
     </div>
+     
 
     // If the user presses login, render this form
     const loginForm = <div className="authentication-form" >
@@ -121,19 +128,25 @@ const Authentication = (props) => {
         </form>
     </div>
 
+    
     const renderView = (formView === 'login') ? loginForm : signUpForm;
     const signUpClass = (formView === 'signup') ? "auth-selected" : "";
     const logInClass = (formView === 'login') ? "auth-selected" : "";
+
     return (
-        <div className="authentication">
+     
+     <div className="authentication">
+            
             <div className="authentication-btns">
             <button id = 'signup' className={`auth-btn ${signUpClass}`} onClick={toggleForm}> Sign Up </button>
             <button id = 'login' className={`auth-btn ${logInClass}`} onClick={toggleForm}> Login </button>
             </div>
-            {renderView}
-        </div>
+           {renderView}
+     </div>
+        
     )
 
 };
+
 
 export default Authentication;
