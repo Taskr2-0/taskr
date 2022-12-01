@@ -225,6 +225,7 @@ body {
     }
 
     .taskTitle,
+    .taskAuthor,
     .taskDesc,
     .taskStatus,
     .taskPriority {
@@ -351,6 +352,13 @@ body {
     
 }
 
+.showCode {
+    display: contents;
+}
+
+.hideCode {
+    display: none;
+}
 
 
 

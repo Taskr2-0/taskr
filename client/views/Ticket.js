@@ -51,6 +51,7 @@ const Ticket = (props) => {
     return (
         <div className={`ticketCard ${ticketCardStatus}`}>
             <h3 className="taskTitle">{props.taskTitle}</h3>
+            {(props.isAdmin == 1) && <div className="taskAuthor">Requested By: {props.firstName} {props.lastName}</div>}
             <div className="taskDesc">Task Description: {props.taskDesc}</div>
             <div className="taskStatus">Status: {props.taskStatus}</div>
             <div className="taskPriority">Priority: {props.taskPriority}</div>
