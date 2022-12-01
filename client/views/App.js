@@ -12,7 +12,7 @@ const App = (props) => {
         is_admin: null
     };
 
-    // tracking user authentication info via state
+    // Tracking user authentication info via state
     const [isLoggedIn, setIsLoggedIn] = useState(() => false);
     const [userDetails, setUserDetails] = useState();
 
