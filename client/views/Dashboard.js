@@ -7,6 +7,8 @@ const Dashboard = (props) => {
 
     const [showComponent, setShowComponent] = useState(false);
 
+    const [isArchive, setView] = useState(true);
+
     // if is_admin is true, make fetch request to admintickets end point
     // if is_admin is false, make fetch request to usertickets end point with id in header
     const route = (props.userDetails.is_admin) ? '/api/admintickets' : '/api/usertickets';
@@ -42,26 +44,56 @@ const Dashboard = (props) => {
         
     const newTaskArr = taskArr.sort((a, b) => b.priority - a.priority);
     const tickets = [];
+    const completed =[];
     for (let i = 0; i < newTaskArr.length; i++) {
-        tickets.push(<Ticket taskId={taskArr[i].id} 
-                             userId={taskArr[i].user_id}
-                             taskTitle={taskArr[i].title}
-                             taskDesc={taskArr[i].description}
-                             taskStatus={taskArr[i].status}
-                             taskPriority={taskArr[i].priority} 
-                             firstName={taskArr[i].first_name}
-                             lastName={taskArr[i].last_name} 
-                             isAdmin={props.userDetails.is_admin}
-                             renderPageAfterUpdate={renderPageAfterUpdate}
-                             userDetails={props.userDetails} 
-                    />)
+        if (taskArr[i].status == 'completed') {
+            completed.push(<Ticket taskId={taskArr[i].id} 
+                userId={taskArr[i].user_id}
+                taskTitle={taskArr[i].title}
+                taskDesc={taskArr[i].description}
+                taskStatus={taskArr[i].status}
+                taskPriority={taskArr[i].priority} 
+                firstName={taskArr[i].first_name}
+                lastName={taskArr[i].last_name} 
+                isAdmin={props.userDetails.is_admin}
+                renderPageAfterUpdate={renderPageAfterUpdate}
+                userDetails={props.userDetails} 
+                />)
+        } else {
+            tickets.push(<Ticket taskId={taskArr[i].id} 
+                                 userId={taskArr[i].user_id}
+                                 taskTitle={taskArr[i].title}
+                                 taskDesc={taskArr[i].description}
+                                 taskStatus={taskArr[i].status}
+                                 taskPriority={taskArr[i].priority} 
+                                 firstName={taskArr[i].first_name}
+                                 lastName={taskArr[i].last_name} 
+                                 isAdmin={props.userDetails.is_admin}
+                                 renderPageAfterUpdate={renderPageAfterUpdate}
+                                 userDetails={props.userDetails} 
+                        />)
+
+        }
     }
     console.log(tickets)
 
+
     return (
         <div className = "dashboard">
-            <h1>Dashboard</h1>
-            {tickets}
+            {
+                isArchive == false ? (
+                    <div> 
+                    <h1>Archive</h1>
+                    <button id = 'showDashboard' onClick ={() => setView(true)}> Show Dashboard </button>
+                    {completed}
+                    </div>
+                ) : (
+                    <div> <h1>Dashboard</h1>
+                    <button id = 'showArchive' onClick ={() => setView(false)}> Show Archive </button>
+                    {tickets}</div>
+                )
+
+            }
             { props.userDetails.is_admin === 0 &&
                 <div>
                     <button className="newRequest" onClick={() => setShowComponent(true)}>New Request</button>
