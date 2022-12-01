@@ -27,7 +27,7 @@ app.use('/api', apiRouter);
 // 404 error handler:
 app.use('*', (req, res, next) => {
   const err = {
-    log: 'Request to unknown path',
+    log: 'Request to unknown path',   
     status: 404,
     message: { err: 'Not found' }
   }
