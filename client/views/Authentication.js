@@ -4,7 +4,7 @@ import Header from "./Header";
 const Authentication = (props) => {
 
     // Tracks input of user into the signup/login fields within state
-    // Note that these state values are determined by the user's entry, *not* by user info received from database
+    // Note that this inputValues state will be determined by the user's entry, *not* by user info received from database
     const [ inputValues, setInputValues ] = useState({
         firstName: '',
         lastName: '', 
@@ -86,7 +86,7 @@ const Authentication = (props) => {
         });
     };
 
-    // Changes the state based on user input
+    // Changes the inputValues state based on user input
     let code;
     function handleChange(e, updatedVal) {
         const updatedInputVal = { [updatedVal] : e.target.value }
@@ -113,6 +113,7 @@ const Authentication = (props) => {
                 <option value={1}> Admin </option>
                 <option value={0}> User </option>
             </select>
+            {/* If user selects Admin from dropdown menu, render additional field to enter verification code */}
             <input type="code" placeholder="Enter Admin Code" className={inputValues.isAdmin == 1 ? '' : 'hideCode'} onChange={(e) => handleChange(e, 'adminCode')}/>
             <input id="signup-submit" type="submit" value="Create Account" onClick={(e) => handleSubmit(e)}/>
         </form>

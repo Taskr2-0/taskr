@@ -1,5 +1,6 @@
 import React from "react";
 
+// Summary is a presentational component that displays a summary of the Taskr app
 const Summary = () => {
 
     return (

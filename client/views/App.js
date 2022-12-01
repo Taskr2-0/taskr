@@ -12,11 +12,11 @@ const App = (props) => {
     is_admin: null,
   };
 
-    // Tracking user authentication info via state
+  // Tracking user authentication info via state
   const [isLoggedIn, setIsLoggedIn] = useState(() => false);
   const [userDetails, setUserDetails] = useState();
 
-    // On loading the app, if user is logged in, set state of user details according to database response
+  // On loading the app, if user is logged in, set state of user details according to database response
   useEffect(() => {
     fetch("/api")
       .then((res) => res.json())
@@ -26,7 +26,7 @@ const App = (props) => {
       });
   }, []);
 
-    // On loading the app, if the user is not logged in, set state of user details to null
+  // On loading the app, if the user is not logged in, set state of user details to null
   useEffect(() => {
     if (!isLoggedIn) {
       setUserDetails({
@@ -52,7 +52,7 @@ const App = (props) => {
     setUserDetails(userObject);
   }
 
-    // Will render either landing page or main page based on if user is logged in by checking state of isLoggedIn
+  // Will render either landing page or main page based on if user is logged in by checking state of isLoggedIn
   return (
     <div className="app">
       {isLoggedIn ? (
