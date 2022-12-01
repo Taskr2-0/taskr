@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 
+// Authentication is rendered by the LandingPage component if the client is not logged in.
+// It conditionally renders a log in or sign up form (defaults to log in, rerenders based on user input)
+// and sends a POST request to backend on user submission.
 const Authentication = (props) => {
+
+    // Tracks input of user into the signup/login fields within state
+    // Note that this inputValues state will be determined by the user's entry, *not* by user info received from database
     const [ inputValues, setInputValues ] = useState({
         firstName: '',
         lastName: '', 
@@ -12,8 +18,10 @@ const Authentication = (props) => {
         adminCode: ''
     });
 
+    // State of formView determines whether component renders a sign up form or a log in form
     const [ formView, setFormView ] = useState('login');
 
+    // Toggles formView state (thereby rerendering login or signup form) whenever user clicks on corresponding tab
     function toggleForm(e) {
         if (e.target.id === 'login') setFormView('login');
         else if (e.target.id === 'signup') setFormView('signup');
@@ -56,7 +64,7 @@ const Authentication = (props) => {
         });
     }
 
-    // Send a POST request to the 'api/login' endpoint
+    // Sends a POST request to the 'api/login' endpoint
     function handleSignin(e) {
         e.preventDefault();
         fetch('api/login', {
@@ -81,7 +89,7 @@ const Authentication = (props) => {
         });
     };
 
-    // Changes the state based on user input
+    // Changes the inputValues state based on user input
     let code;
     function handleChange(e, updatedVal) {
         const updatedInputVal = { [updatedVal] : e.target.value }
@@ -108,6 +116,7 @@ const Authentication = (props) => {
                 <option value={1}> Admin </option>
                 <option value={0}> User </option>
             </select>
+            {/* If user selects Admin from dropdown menu, render additional field to enter verification code */}
             <input type="code" placeholder="Enter Admin Code" className={inputValues.isAdmin == 1 ? '' : 'hideCode'} onChange={(e) => handleChange(e, 'adminCode')}/>
             <input id="signup-submit" type="submit" value="Create Account" onClick={(e) => handleSubmit(e)}/>
         </form>
