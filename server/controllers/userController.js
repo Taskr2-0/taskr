@@ -4,9 +4,21 @@ const userController = {};
 
 // save new users to database
 userController.signup = async (req, res, next) => {
-  if (Object.values(req.body).some(val => !val || val === '')) {
+  console.log('THIS IS THE REQ.BODY: ', req.body)
+  if (req.body.isAdmin == 1 && req.body.adminCode != 123) {
     const error = {
-      log: "Error at userController.signup middleware: " + err,
+      log: "unauthorized admin ",
+      status: 400,
+      message: { err: "Unable to log in as admin, incorrect code" },
+    };
+    return next(error)
+  }
+  
+  const requiredFields = [req.body.email, req.body.firstName, req.body.lastName, req.body.password, req.body.phoneNum, req.body.isAdmin]
+  console.log(requiredFields)
+  if (Object.values(requiredFields).some(val => !val || val === '')) {
+    const error = {
+      log: "Error at userController.signup middleware: ",
       status: 400,
       message: { err: "Please fill out all fields to sign up" },
     };
@@ -14,7 +26,8 @@ userController.signup = async (req, res, next) => {
   }
 
   const { email, firstName, lastName, password, phoneNum, isAdmin } = req.body;
-
+  
+  
   try {
     const queryText = `INSERT INTO users (email, first_name, last_name, password, phone_number, is_admin)
                         VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`;
@@ -22,6 +35,7 @@ userController.signup = async (req, res, next) => {
     const values = [email, firstName, lastName, password, phoneNum, isAdmin];
 
     const createResponse = await db.query(queryText, values);
+    console.log('THIS IS THE CREQTERESPONSE QUERY: ', createResponse)
     res.locals.newUser = createResponse.rows[0];
     return next();
   } catch (err) {
@@ -60,10 +74,11 @@ userController.login = async (req, res, next) => {
 };
 
 userController.authenticateUser = (req, res, next) => {
-  if(req.session.user){
+  console.log(req.session)
+  if(req.session.user) {
     res.locals.user = req.session.user
     return next();
-  }else {
+  } else {
     const error = {
       log: 'Error at userController.authenticateUser middleware: Unauthorized',
       status: 400,

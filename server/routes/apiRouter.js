@@ -32,7 +32,7 @@ router.post('/login', userController.login, (req, res) => {
 })
 
 // route requests to get user tickets
-router.get('/usertickets', userController.authenticateUser,ticketController.getUserTickets, (req, res) => {
+router.get('/usertickets', userController.authenticateUser, ticketController.getUserTickets, (req, res) => {
   console.log ('exited get user tickets middleware, preparing get tickets reesponse');
   return res.status(200).json(res.locals.userTickets); // expecting ticketController.getUserTickets to save db response as locals property userTickets
 })
