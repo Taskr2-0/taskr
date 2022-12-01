@@ -10,7 +10,8 @@ const Ticket = (props) => {
                 newStatus: newStatus,
                 ticketId: props.taskId
             }),
-        }).then(() => {
+        }).then((data) => {
+            console.log(data)
             props.renderPageAfterUpdate();
         })
     }
