@@ -22,6 +22,8 @@ userController.signup = async (req, res, next) => {
     }
 
     const createResponse = await db.query(queryText, values);
+    req.session.user = createResponse.rows[0];
+    req.session.authorized = true;
     res.locals.newUser = createResponse.rows[0];
     return next();
   } catch (err) {
@@ -41,7 +43,6 @@ userController.login = async (req, res, next) => {
     const queryText = "SELECT * FROM users WHERE email=$1 AND password=$2;";
     const values = [req.body.email, req.body.password];
     const queryResult = await db.query(queryText, values);
-    console.log(queryResult.rows[0]);
     req.session.user = queryResult.rows[0];
     req.session.authorized = true;
     res.locals.loggedIn = queryResult.rows[0];
