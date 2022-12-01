@@ -1,6 +1,7 @@
 import React from "react";
 
-
+// Headers is a presentational component rendered by MainPage.
+// It greets the logged in user.
 const Header = (props) => {
     console.log('props: ', props)
     return (

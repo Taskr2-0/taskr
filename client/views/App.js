@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import LandingPage from "./LandingPage";
 import MainPage from "./MainPage";
 
-// will render either landing page or main page based on if user is logged in
+// App is the top level component. On mounting, it checks if the user is logged in and updates state accordingly.
+// If the user is not logged in, it renders the LandingPage component.
+// If the user is logged in, it renders the MainPage component.
 const App = (props) => {
   const userDefault = {
     id: null,
@@ -12,20 +14,24 @@ const App = (props) => {
     is_admin: null,
   };
 
+  // Creates state to track user authentication info
   const [isLoggedIn, setIsLoggedIn] = useState(() => false);
   const [userDetails, setUserDetails] = useState(userDefault);
 
+  // On loading the app, if user is logged in, set state of user details according to database response
   useEffect(() => {
     if(!userDetails.id){
       fetch("/api")
       .then((res) => res.json())
       .then((user) => {
+        console.log('user: ', user);
         setUserDetails(user);
         setIsLoggedIn(true);
       });
     }
   }, []);
 
+  // If the user is not logged in or whenver user is logged out, set state of user details to null
   useEffect(() => {
     if (!isLoggedIn) {
       setUserDetails({
@@ -53,6 +59,7 @@ const App = (props) => {
     setUserDetails(userObject);
   }
 
+  // Will render either landing page or main page based on if user is logged in by checking state of isLoggedIn
   return (
     <div className="app">
       {isLoggedIn ? (
