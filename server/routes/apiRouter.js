@@ -62,4 +62,10 @@ router.patch('/admintickets', ticketController.updateTicket, (req, res) => {
   return res.status(200).json(res.locals.updatedTicket); // expecting ticketController.updateTicket to save db response to locals as updatedTicket
 })
 
+router.get('/logout', (req, res) => {
+  console.log ('logging out of user');
+  req.session.destroy();
+  return res.sendStatus(200);
+})
+
 module.exports = router;
