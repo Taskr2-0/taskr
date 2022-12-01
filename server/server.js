@@ -15,7 +15,7 @@ app.use(session({
   secret: 'asdfqweraljfkmwqer',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: minute }
+  cookie: { maxAge: hour }
 }))
 
 // routes
