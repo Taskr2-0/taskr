@@ -13,15 +13,17 @@ const App = (props) => {
   };
 
   const [isLoggedIn, setIsLoggedIn] = useState(() => false);
-  const [userDetails, setUserDetails] = useState();
+  const [userDetails, setUserDetails] = useState(userDefault);
 
   useEffect(() => {
-    fetch("/api")
+    if(!userDetails.id){
+      fetch("/api")
       .then((res) => res.json())
       .then((user) => {
         setUserDetails(user);
         setIsLoggedIn(true);
       });
+    }
   }, []);
 
   useEffect(() => {
@@ -33,6 +35,8 @@ const App = (props) => {
         last_name: null,
         is_admin: null,
       });
+    }else {
+      console.log('logged')
     }
   }, [isLoggedIn]);
 
