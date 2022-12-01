@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import LandingPage from "./LandingPage";
 import MainPage from "./MainPage";
 
-
+// App is the top level component. On mounting, it checks if the user is logged in and updates state accordingly.
+// If the user is not logged in, it renders the LandingPage component.
+// If the user is logged in, it renders the MainPage component.
 const App = (props) => {
   const userDefault = {
     id: null,
@@ -12,7 +14,7 @@ const App = (props) => {
     is_admin: null,
   };
 
-  // Tracking user authentication info via state
+  // Creates state to track user authentication info
   const [isLoggedIn, setIsLoggedIn] = useState(() => false);
   const [userDetails, setUserDetails] = useState();
 
@@ -21,12 +23,13 @@ const App = (props) => {
     fetch("/api")
       .then((res) => res.json())
       .then((user) => {
+        console.log('user: ', user);
         setUserDetails(user);
         setIsLoggedIn(true);
       });
   }, []);
 
-  // On loading the app, if the user is not logged in, set state of user details to null
+  // If the user is not logged in or whenver user is logged out, set state of user details to null
   useEffect(() => {
     if (!isLoggedIn) {
       setUserDetails({

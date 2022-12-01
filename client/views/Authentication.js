@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 
+// Authentication is rendered by the LandingPage component if the client is not logged in.
+// It conditionally renders a log in or sign up form (defaults to log in, rerenders based on user input)
+// and sends a POST request to backend on user submission.
 const Authentication = (props) => {
 
     // Tracks input of user into the signup/login fields within state
