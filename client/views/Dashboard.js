@@ -83,14 +83,19 @@ const Dashboard = (props) => {
             {
                 isArchive == false ? (
                     <div> 
-                    <h1>Archive</h1>
-                    <button id = 'showDashboard' onClick ={() => setView(true)}> Show Dashboard </button>
-                    {completed}
+                        <div className='headContainer'>   <h1 className='dashName'>Archive</h1>
+                            <button id = 'showDashboard' className = 'toggleDash' onClick ={() => setView(true)}> Show Dashboard </button>
+                        </div>
+                            {completed}
                     </div>
                 ) : (
-                    <div> <h1>Dashboard</h1>
-                    <button id = 'showArchive' onClick ={() => setView(false)}> Show Archive </button>
-                    {tickets}</div>
+                    <div> 
+                        <div className='headContainer'> 
+                        <h1 className='dashName'> Dashboard</h1>
+                    <button id = 'showArchive' className = 'toggleDash' onClick ={() => setView(false)}> Show Archive </button>
+                    </div>
+                    {tickets}
+                    </div>
                 )
 
             }

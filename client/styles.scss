@@ -360,6 +360,24 @@ body {
     display: none;
 }
 
+.toggleDash {
+    background: rgb(200,182,255);
+    background: linear-gradient(319deg, rgba(200,182,255,1) 0%, rgba(132,169,140,1) 63%);
+    color: $tertiary-color;
+    padding: 10px;
+    border-radius: 5px;
+    float: right;
+    border: none;
+    box-shadow: 0px 0px 7px #84A98C;
+    width: fit-content;
+    height: 3em;
+    margin-top: 10px;
+}
 
+.headContainer {
+    display: flex;
+    justify-content: space-between;
+
+}
 
 
