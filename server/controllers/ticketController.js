@@ -40,7 +40,9 @@ ticketController.getUserTickets = async (req, res, next) => {
 ticketController.getAdminTickets = async (req, res, next) => {
   console.log('entering getuserTickets middleware');
   try {
-    const queryText = `SELECT * FROM tickets;`;
+    const queryText = `SELECT tickets.*, users.first_name, users.last_name FROM 
+                      tickets LEFT OUTER JOIN users
+                      ON users.id = tickets.user_id;`;
     const allTickets = await db.query(queryText);
     res.locals.adminTickets = allTickets.rows; // TO-DO: replace 'test' string with db response
     return next();
