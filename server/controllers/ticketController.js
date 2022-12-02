@@ -39,6 +39,15 @@ ticketController.getUserTickets = async (req, res, next) => {
 
 ticketController.getAdminTickets = async (req, res, next) => {
   console.log('entering getuserTickets middleware');
+  if(req.session.user.is_admin === 0) {
+    const error = {
+      log: 'Error at ticketController.getAdminTickets middleware: Unauthorized',
+      status: 400,
+      message: {err: 'Unauthorized'}
+    }
+    return next(error)
+  }
+
   try {
     const queryText = `SELECT tickets.*, users.first_name, users.last_name FROM 
                       tickets LEFT OUTER JOIN users
@@ -102,6 +111,14 @@ ticketController.deleteTicket = async (req, res, next) => {
 }
 
 ticketController.updateTicket = async (req, res, next) => {
+  if(!req.session.user.is_admin) {
+    const error = {
+      log: 'Error at ticketController.updateTickets middleware: Unauthorized',
+      status: 400,
+      message: {err: 'Unauthorized'}
+    }
+  }
+
   console.log('entering updateTicket middleware');
   try {
     // TO-DO db query here!

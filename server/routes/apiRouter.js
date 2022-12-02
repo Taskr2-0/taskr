@@ -66,7 +66,7 @@ router.delete(
 );
 
 // route requests to get admin tickets
-router.get("/admintickets", ticketController.getAdminTickets, (req, res) => {
+router.get("/admintickets", userController.authenticateUser, ticketController.getAdminTickets, (req, res) => {
   console.log(
     "exited get admin tickets middleware, preparing get tickets reesponse"
   );
@@ -74,7 +74,7 @@ router.get("/admintickets", ticketController.getAdminTickets, (req, res) => {
 });
 
 // route requests for admin to update ticket status
-router.patch("/admintickets", ticketController.updateTicket, (req, res) => {
+router.patch("/admintickets", userController.authenticateUser, ticketController.updateTicket, (req, res) => {
   console.log("exited updateTicket middleware, preparing response");
   return res.status(200).json(res.locals.updatedTicket); // expecting ticketController.updateTicket to save db response to locals as updatedTicket
 });
